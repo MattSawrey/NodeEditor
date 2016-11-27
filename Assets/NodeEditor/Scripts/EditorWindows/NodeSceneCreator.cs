@@ -74,7 +74,7 @@ public class NodeSceneCreator : EditorWindow
 
     private void CreateNewScene()
     {
-        NodeScene newScene = NodeScene.CreateInstance(nodeSceneName);
+        NodeScene newScene = NodeScene.CreateScene(nodeSceneName);
         AssetDatabase.CreateAsset(newScene, nodeSceneSaveFilePath + nodeSceneName + ".asset");
         EditorUtility.SetDirty(newScene);
         AssetDatabase.SaveAssets();

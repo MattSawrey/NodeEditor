@@ -7,7 +7,7 @@ public class NodeScene : ScriptableObject
     public string sceneName = "";
     public List<NodeWindow> nodes = new List<NodeWindow>();
 
-    public static NodeScene CreateInstance(string sceneName)
+    public static NodeScene CreateScene(string sceneName)
     {
         var instance = CreateInstance<NodeScene>();
         instance.sceneName = sceneName;

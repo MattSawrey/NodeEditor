@@ -134,7 +134,7 @@ public class NodeEditor : EditorWindow
     {
         if (selectedScene != null)
         {
-            NodeSceneDeletor.Init(this, selectedSceneIndex, selectedScene.sceneName);
+            NodeSceneDeletor.Init(this, selectedScene.sceneName);
         }
         else
         {

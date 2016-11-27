@@ -65,27 +65,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CustomEditors\EditorGUIStatics.cs" />
-    <Compile Include="Assets\EditorCoroutine\Scripts\CoroutineWindowExample.cs" />
-    <Compile Include="Assets\EditorCoroutine\Scripts\EditorCoroutine.cs" />
-    <Compile Include="Assets\EditorCoroutine\Scripts\EditorCoroutineExtensions.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\CustomEditorHelpers\EditorGUIStatics.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\CustomEditorHelpers\EditorZoomArea.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\EditorMessage.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\NodeEditor.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\NodeSceneCreator.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\NodeSceneDeletor.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\Models\NodeScene.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\Models\NodeWindow.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\Models\NodeWindowSizes.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnection.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionLineType.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionPoint.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionPointsStandard.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionType.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionTypes.cs" />
-    <Compile Include="Assets\NodeEditor\Scripts\NodeScene.cs" />
-    <Compile Include="Assets\NodeEditor\Scripts\NodeWindow.cs" />
-    <Compile Include="Assets\NodeEditor\Scripts\NodeWindowSizes.cs" />
     <Compile Include="Assets\RectExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\EditorCoroutine\Readme - v1.0.0.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

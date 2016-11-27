@@ -9,18 +9,16 @@ public class NodeSceneDeletor : EditorWindow
     private static NodeSceneDeletor window;
     private static NodeEditor callingEditor;
 
-    private static int indexOfSceneToDelete;
     private static string nameOfSceneToDelete;
     private static int deleteSceneActionOption = 0;
 
-    public static void Init(NodeEditor editor, int sceneToDeleteIndex, string sceneToDeleteName)
+    public static void Init(NodeEditor editor, string sceneToDeleteName)
     {
         if (window == null)
             window = GetWindow<NodeSceneDeletor>();
 
         callingEditor = editor;
 
-        indexOfSceneToDelete = sceneToDeleteIndex;
         nameOfSceneToDelete = sceneToDeleteName;
 
         window.minSize = new Vector2(200f, 120f);
