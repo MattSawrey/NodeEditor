@@ -260,7 +260,10 @@ public class NodeEditor : EditorWindow
                 }
 
                 GUILayout.Label("Zoom: ", GUILayout.Width(40f));
-                zoomScale = EditorGUILayout.Slider(zoomScale, 0.5f, 1.5f);
+                zoomScale = GUILayout.HorizontalSlider(zoomScale, 0.6f, 1.4f);
+                GUILayout.Label(zoomScale.ToString(), GUILayout.Width(40f));
+                //NEVER use EditorGUILayout slider for this purpose
+                //zoomScale = EditorGUILayout.Slider(zoomScale, 0.5f, 1.5f);
 
                 if (GUI.changed)
                     ReAssignsceneSelectionGridContent();

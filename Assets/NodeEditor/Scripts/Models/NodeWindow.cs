@@ -73,7 +73,7 @@ public class NodeWindow : ScriptableObject
         int numConnectionTypeAlreadyCreated = 0;
 
         for (int i = 0; i < nodeConnections.Count; i++)
-            if (nodeConnections[i].connectionType.Equals(connectionType))
+            if (nodeConnections[i].connectionType.connectionName.Equals(connectionType.connectionName))
                 numConnectionTypeAlreadyCreated++;
 
         return numConnectionTypeAlreadyCreated < connectionType.maxNumConnections ? true : false;
