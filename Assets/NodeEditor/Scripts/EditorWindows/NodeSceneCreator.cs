@@ -26,7 +26,7 @@ public class NodeSceneCreator : EditorWindow
     private static NodeSceneCreator window;
     private static NodeEditor callingEditor;
 
-    public static void Init(NodeEditor editor)
+    public static void Init(NodeEditor editor, Vector2 position)
     {
         if (window == null)
             window = GetWindow<NodeSceneCreator>();
@@ -35,7 +35,9 @@ public class NodeSceneCreator : EditorWindow
 
         callingEditor = editor;
 
-        window.minSize = new Vector2(400f, 100f);
+        window.maxSize = new Vector2(340f, 60f);
+        window.minSize = new Vector2(340f, 60f);
+        window.position = new Rect(position.x, position.y, 340f, 60f);
         window.Show();
     }
 

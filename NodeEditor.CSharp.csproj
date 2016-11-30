@@ -80,7 +80,7 @@
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionPointsStandard.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionType.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionTypes.cs" />
-    <Compile Include="Assets\RectExtensions.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\RectExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "this2", menuName = "Custom/This2", order = 1)]
+[CreateAssetMenu(fileName = "Node", menuName = "Custom/This2", order = 1)]
 public class NodeWindow : ScriptableObject
 {
     //Descritptive Attributes

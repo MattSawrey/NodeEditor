@@ -44,36 +44,28 @@ public class NodeConnection
                 break;
         }
 
-        //Connection points
+        //Draw Connection Points
         Handles.color = Color.gray;
         Handles.DrawSolidDisc(outputPoint, Vector3.forward, 6f);
         Handles.DrawSolidDisc(inputPoint, Vector3.forward, 6f);
 
-        //Pressable circle button
+        //Draw the mid-connection handle button
         Handles.color = new Color(1f, 1f, 1f, 0.4f);
         Handles.DrawSolidDisc(midPoint - new Vector2(10f, -4f), -Vector3.forward, 8f);
         GUI.contentColor = Color.black;
         GUI.Label(new Rect(midPoint - new Vector2(16.3f, 4.2f), new Vector2(80f, 80f)), "+");
         Handles.color = Color.blue;
-
-        //HERE IS THE HANDLE BUTTON 
-        if (Handles.Button(midPoint - new Vector2(10f, -4f), Quaternion.identity, 8f, 8f, DrawCap))
+        if (Handles.Button(midPoint - new Vector2(10f, -4f), Quaternion.identity, 8f, 8f, Handles.CircleCap))
         {
-            Debug.Log(outputNode.nodeName);
-            NodeEditor.ReAssignConnection(connectionType, outputNode);
+            NodeEditor.window.ReAssignConnection(connectionType, outputNode);
             outputNode.nodeConnections.Remove(this);
         }
 
-        //Connection Name
+        //Connection Name Label
         GUI.contentColor = Color.white;
         Rect midPointRect = new Rect((outputPoint + inputPoint) / 2f, new Vector2(100f, 40f));
         GUI.skin.label.fontStyle = FontStyle.Bold;
         GUI.Label(midPointRect, connectionType.connectionName);
         GUI.skin.label.fontStyle = FontStyle.Normal;
-    }
-
-    void DrawCap(int controlId, Vector3 position, Quaternion rotation, float size)
-    {
-        Handles.CubeCap(controlId, position, rotation, size);
     }
 }
