@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,7 +74,7 @@
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\NodeSceneCreator.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\EditorWindows\NodeSceneDeletor.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\Models\NodeScene.cs" />
-    <Compile Include="Assets\NodeEditor\Scripts\Models\NodeWindow.cs" />
+    <Compile Include="Assets\NodeEditor\Scripts\Models\Node.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\Models\NodeWindowSizes.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnection.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionLineType.cs" />

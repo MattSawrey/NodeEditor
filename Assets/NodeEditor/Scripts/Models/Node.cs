@@ -2,8 +2,8 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Node", menuName = "Custom/This2", order = 1)]
-public class NodeWindow : ScriptableObject
+[CreateAssetMenu(fileName = "Node", menuName = "Custom/Node", order = 1)]
+public class Node : ScriptableObject
 {
     //Descritptive Attributes
     public Rect nodeRect;
@@ -21,10 +21,9 @@ public class NodeWindow : ScriptableObject
     public List<NodeConnection> nodeConnections = new List<NodeConnection>();
     public bool hasoutputNodes { get { if (nodeConnections != null) return nodeConnections.Count > 0; else return false; } }
 
-    public static NodeWindow CreateInstance( Rect nodeRect )
+    public static Node CreateInstance( Rect nodeRect )
     {
-        var instance = CreateInstance<NodeWindow>();
-        //instance.nodeConnections = new List<NodeConnection>();
+        var instance = CreateInstance<Node>();
         instance.nodeRect = nodeRect;
         return instance;
     }
@@ -33,7 +32,7 @@ public class NodeWindow : ScriptableObject
     {
         GUILayout.BeginHorizontal();
         {
-            GUILayout.Label("NodeName:", GUILayout.Width(70f));
+            GUILayout.Label("Title:", GUILayout.Width(70f));
             nodeName = GUILayout.TextField(nodeName);
         }
         GUILayout.EndHorizontal();
@@ -57,7 +56,7 @@ public class NodeWindow : ScriptableObject
     }
 
     //Connections
-    public virtual void SetConnection(NodeWindow node, NodeConnectionType connectionType)
+    public virtual void SetConnection(Node node, NodeConnectionType connectionType)
     {
         NodeConnection connection = new NodeConnection(this, node, connectionType);
 
@@ -80,7 +79,7 @@ public class NodeWindow : ScriptableObject
     }
 
     //Can't delete from a list whilst iterating through it, hence the overly complicated method
-    public virtual void DeleteConnectionsToNode(NodeWindow nodeToDelete)
+    public virtual void DeleteConnectionsToNode(Node nodeToDelete)
     {
         List<int> indexesToRemove = new List<int>();
 

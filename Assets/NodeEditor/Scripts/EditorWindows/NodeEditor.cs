@@ -36,6 +36,12 @@ public class NodeEditor : EditorWindow
     private Vector2 targetPosition;
     private float counter = 0f;
 
+    //Editor Message
+    private bool showEditorMessage = false;
+    private string editorMessage;
+    private Color editorMessageColor = Color.white;
+    private float editorMessageTimer = 0f;
+
     //Sizings
     private int topPanelHeight = 22;
     private static float leftPaneWidth = 200f;
@@ -112,7 +118,8 @@ public class NodeEditor : EditorWindow
             for (int i = 0; i < selectedScene.nodes.Count; i++)
                 EditorUtility.SetDirty(selectedScene.nodes[i]);
             AssetDatabase.SaveAssets();
-            EditorMessage.Init(this, "Scene Saved!", Color.green, mousePosition, new Vector2(60f, 60f));
+            DisplayEditorMessage("Scene Saved!", Color.green);
+            //EditorMessage.Init(this, "Scene Saved!", Color.green, mousePosition, new Vector2(60f, 60f));
         }
         else
             EditorMessage.Init(this, "No scene selected to save!", Color.red, mousePosition, new Vector2(60f, 60f));
@@ -162,6 +169,13 @@ public class NodeEditor : EditorWindow
                     DrawSelectionGrids();
                 }
                 GUILayout.EndVertical();
+
+                //Editor Message
+                GUILayout.BeginVertical(GUILayout.Width(leftPaneWidth), GUILayout.Height(20f));
+                {
+                    DrawEditorMessage();
+                }
+                GUILayout.EndVertical();
             }
             GUILayout.EndVertical();
             EditorGUIStatics.DrawLine(new Vector2(leftPaneWidth, 0f), new Vector2(leftPaneWidth, position.height), Color.black, 2f);
@@ -169,17 +183,7 @@ public class NodeEditor : EditorWindow
             //Scene Name and Zoom Bar    
             GUILayout.BeginHorizontal(GUILayout.Height(topPanelHeight));
             {
-                GUILayout.Space(8f);
-
-                if (nodeScenes.Count > 0)
-                {
-                    EditorGUILayout.LabelField("Scene Name: ", GUILayout.Width(85f));
-                    selectedScene.sceneName = GUILayout.TextField(selectedScene.sceneName, GUILayout.MaxWidth(180f));
-                }
-
-                GUILayout.Label("Zoom: ", GUILayout.Width(40f));
-                zoomScale = GUILayout.HorizontalSlider(zoomScale, zoomScaleLowerLimit, zoomScaleUpperLimit);
-                GUILayout.Label(Math.Round(zoomScale, 2).ToString(), GUILayout.Width(40f));
+                DrawScrollAreaHeader();
             }
             GUILayout.EndHorizontal();
 
@@ -245,6 +249,33 @@ public class NodeEditor : EditorWindow
             }
         }
         GUILayout.EndScrollView();
+    }
+
+    private void DrawScrollAreaHeader()
+    {
+        GUILayout.Space(8f);
+
+        if (nodeScenes.Count > 0)
+        {
+            EditorGUILayout.LabelField("Scene Name: ", GUILayout.MinWidth(85f), GUILayout.MaxWidth(85f), GUILayout.ExpandWidth(false));
+            selectedScene.sceneName = GUILayout.TextField(selectedScene.sceneName, GUILayout.MaxWidth(180f), GUILayout.MinWidth(180f), GUILayout.ExpandWidth(false));
+        }
+
+        GUILayout.Label("Zoom: ", GUILayout.Width(40f), GUILayout.ExpandWidth(false));
+        zoomScale = GUILayout.HorizontalSlider(zoomScale, zoomScaleLowerLimit, zoomScaleUpperLimit, GUILayout.MinWidth(200f), GUILayout.ExpandWidth(true));
+        GUILayout.Label(Math.Round(zoomScale, 2).ToString(), GUILayout.Width(40f), GUILayout.ExpandWidth(false));
+    }
+
+    private void DrawEditorMessage()
+    {
+        if (showEditorMessage)
+        {
+            GUI.contentColor = editorMessageColor;
+            GUI.skin.label.wordWrap = true;
+            GUILayout.Label(editorMessage);
+            GUI.skin.label.wordWrap = false;
+            GUI.contentColor = Color.white;
+        }        
     }
 
     private void DrawScrollAreaGUI(Event e)
@@ -353,7 +384,7 @@ public class NodeEditor : EditorWindow
         }
     }
 
-    public void ReAssignConnection(NodeConnectionType connectionType, NodeWindow outputNode)
+    public void ReAssignConnection(NodeConnectionType connectionType, Node outputNode)
     {
         selectedConnectionType = connectionType;
         selectedScene.selectedNode = outputNode;
@@ -365,12 +396,19 @@ public class NodeEditor : EditorWindow
         selectedScene.nodes[id].DrawNode();
     }
 
+    public void DisplayEditorMessage(string message, Color color)
+    {
+        showEditorMessage = true;
+        editorMessage = message;
+        editorMessageColor = color;
+    }
+
     private void LerpToNode(int index)
     {
         posLerp = true;
         counter = 0f;
 
-        NodeWindow selectedNode = selectedScene.nodes[index];        
+        Node selectedNode = selectedScene.nodes[index];        
         Vector2 offset = new Vector2(position.width / 2f, position.height / 2f);
         targetPosition = selectedNode.nodeRect.position - offset;
     }
@@ -390,6 +428,18 @@ public class NodeEditor : EditorWindow
                 scrollPos = Vector2.Lerp(scrollPos, targetPosition, counter);
                 counter += 0.002f;
             }
+        }
+        if (showEditorMessage)
+        {
+            if (editorMessageTimer > 3f)
+            {
+                showEditorMessage = false;
+                editorMessageTimer = 0f;
+                editorMessageColor = Color.white;
+                Repaint();
+            }
+            else      
+                editorMessageTimer += 0.03f;
         }
     }
     #endregion

@@ -35,8 +35,8 @@ public class NodeSceneCreator : EditorWindow
 
         callingEditor = editor;
 
-        window.maxSize = new Vector2(340f, 60f);
-        window.minSize = new Vector2(340f, 60f);
+        window.maxSize = new Vector2(310f, 68f);
+        window.minSize = new Vector2(300f, 60f);
         window.position = new Rect(position.x, position.y, 340f, 60f);
         window.Show();
     }
@@ -53,20 +53,31 @@ public class NodeSceneCreator : EditorWindow
             GUILayout.BeginHorizontal();
             {
                 GUILayout.FlexibleSpace();
-                if (!doesSceneNameAlreadyExist)
-                {
-                    if (GUILayout.Button("Create Scene", GUILayout.MaxWidth(maxButtonWidth)))
-                    {
-                        CreateNewScene();
-                    }
-                }
-                else
+                if (doesSceneNameAlreadyExist)
                 {
                     GUI.color = Color.red;
                     EditorStyles.label.wordWrap = true;
                     EditorGUILayout.LabelField("Scene Name Already Exists. Pick Another Name!");
                     GUI.color = Color.white;
                 }
+                GUILayout.BeginHorizontal();
+                { 
+                    GUI.backgroundColor = Color.green;
+                    if (!doesSceneNameAlreadyExist)
+                    {
+                        if (GUILayout.Button("Create Scene", GUILayout.MaxWidth(maxButtonWidth)))
+                        {
+                            CreateNewScene();
+                        }
+                    }               
+                    GUI.backgroundColor = Color.red;
+                    if (GUILayout.Button("Back"))
+                    {
+                        window.Close();
+                    }
+                    GUI.backgroundColor = Color.white;
+                }
+                GUILayout.EndHorizontal();
                 GUILayout.FlexibleSpace();
             }
             GUILayout.EndHorizontal();
@@ -83,6 +94,7 @@ public class NodeSceneCreator : EditorWindow
         callingEditor.LoadScenes();
         callingEditor.LoadScene(callingEditor.numScenes-1);
         callingEditor.Repaint();
+        callingEditor.DisplayEditorMessage("Created A New Scene", Color.blue);
         window.Close();
     }
 

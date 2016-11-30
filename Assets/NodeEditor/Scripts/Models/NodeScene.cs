@@ -2,25 +2,37 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Scene", menuName ="Custom/This", order = 1)]
+[CreateAssetMenu(fileName = "Scene", menuName ="Custom/NodeScene", order = 1)]
 public class NodeScene : ScriptableObject
 {
+    #region - Vars and Initialisation 
+
     //Vars and Props
     public string sceneName = "";
-    public List<NodeWindow> nodes = new List<NodeWindow>();
-    public NodeWindow selectedNode;
+    public List<Node> nodes = new List<Node>();
+    public Node selectedNode;
 
+    //Node Events
     public bool nodesShownInSelectionGrid = false;
     public bool clickedOnNode = false;
     public bool isConnectionModeActive = false;
     public bool isNodeDragActive = false;
 
+    //Selected Indexes
     private int selectedNodeIndex = 0;
     public int SelectedNodeIndex { get { return selectedNodeIndex; } set { selectedNodeIndex = value; } }
     private int mouseOverNodeIndex = 0;
     private int lastSelectedNodeIndex = 0;
 
     private static Color selectedNodeColor = new Color(0.4f, 0.95f, 0.5f);
+
+    public static NodeScene CreateScene(string sceneName)
+    {
+        var instance = CreateInstance<NodeScene>();
+        instance.sceneName = sceneName;
+        instance.name = sceneName;
+        return instance;
+    }
 
     public List<string> GetNodeNames()
     {
@@ -29,8 +41,6 @@ public class NodeScene : ScriptableObject
             nodeNames.Add(nodes[i].nodeName);
         return nodeNames;
     }
-
-    //Loading
 
     public int LoadSelectedNodeIndex()
     {
@@ -46,19 +56,13 @@ public class NodeScene : ScriptableObject
         lastSelectedNodeIndex = selectedNodeIndex;
     }
 
-    //Creation and Deletion
+    #endregion
 
-    public static NodeScene CreateScene(string sceneName)
-    {
-        var instance = CreateInstance<NodeScene>();
-        instance.sceneName = sceneName;
-        instance.name = sceneName;
-        return instance;
-    }
+    #region - Creation and Deletion
 
-    public NodeWindow CreateNode(Vector2 position)
+    public Node CreateNode(Vector2 position)
     {
-        NodeWindow newNode = NodeWindow.CreateInstance(new Rect(position, new Vector2(NodeWindow.minWidth, NodeWindow.minHeight)));
+        Node newNode = Node.CreateInstance(new Rect(position, new Vector2(Node.minWidth, Node.minHeight)));
         newNode.nodeName = (nodes.Count + 1).ToString();
         nodes.Add(newNode);
 
@@ -85,7 +89,9 @@ public class NodeScene : ScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    //Drawing Scene GUI
+    #endregion
+
+    #region - Scene GUI
 
     public virtual void DrawNodeGUI(Event currentEvent, Vector2 mousePosition)
     {
@@ -108,8 +114,6 @@ public class NodeScene : ScriptableObject
     {
         nodes[nodeIndex].DrawNode();
     }
-
-    //Processing Scene GUI Events
 
     public virtual void ProcessNodeGUIEvents(Event currentEvent, Vector2 mousePosition)
     {
@@ -152,7 +156,7 @@ public class NodeScene : ScriptableObject
                     menu.AddSeparator("");
 
                     menu.AddItem(new GUIContent("Delete Node"), false, NodeGUIEventsContextCallback, "Delete Node");
-                    menu.DropDown(new Rect(mousePosition, Vector2.one));
+                    menu.DropDown(new Rect(NodeEditor.zoomScrollCorrectedMenuPosition, Vector2.one));
 
                     currentEvent.Use();
                 }
@@ -253,4 +257,6 @@ public class NodeScene : ScriptableObject
                 break;
         }
     }
+
+    #endregion
 }

@@ -3,8 +3,6 @@ using UnityEditor;
 
 public class NodeSceneDeletor : EditorWindow
 {
-    
-
     //References
     private static NodeSceneDeletor window;
     private static NodeEditor callingEditor;
@@ -21,7 +19,8 @@ public class NodeSceneDeletor : EditorWindow
 
         nameOfSceneToDelete = sceneToDeleteName;
 
-        window.minSize = new Vector2(200f, 120f);
+        window.maxSize = new Vector2(280f, 125f);
+        window.minSize = new Vector2(275f, 120f);
         window.Show();
     }
 
@@ -72,7 +71,7 @@ public class NodeSceneDeletor : EditorWindow
 
         if (isSceneDeleted)
         {
-            EditorMessage.Init(callingEditor, "Deleted scene - '" + nameOfSceneToDelete + "'.");
+            callingEditor.DisplayEditorMessage("Deleted scene - '" + nameOfSceneToDelete + "'.", Color.red);
             AssetDatabase.SaveAssets();
             callingEditor.ReAssignVarsOnSceneDelete();
         }

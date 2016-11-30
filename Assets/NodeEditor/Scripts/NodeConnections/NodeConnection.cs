@@ -5,15 +5,15 @@ using System;
 [Serializable]
 public class NodeConnection
 {
-    public NodeWindow outputNode;
-    public NodeWindow inputNode;
+    public Node outputNode;
+    public Node inputNode;
     public NodeConnectionType connectionType;
 
     private Vector2 outputPoint;
     private Vector2 inputPoint;
     private Vector2 midPoint;
 
-    public NodeConnection(NodeWindow outputNode, NodeWindow inputNode, NodeConnectionType connectionType)
+    public NodeConnection(Node outputNode, Node inputNode, NodeConnectionType connectionType)
     {
         this.outputNode = outputNode;
         this.inputNode = inputNode;
@@ -48,13 +48,13 @@ public class NodeConnection
         Handles.color = Color.gray;
         Handles.DrawSolidDisc(outputPoint, Vector3.forward, 6f);
         Handles.DrawSolidDisc(inputPoint, Vector3.forward, 6f);
+        Handles.color = Color.white;
 
         //Draw the mid-connection handle button
         Handles.color = new Color(1f, 1f, 1f, 0.4f);
         Handles.DrawSolidDisc(midPoint - new Vector2(10f, -4f), -Vector3.forward, 8f);
         GUI.contentColor = Color.black;
         GUI.Label(new Rect(midPoint - new Vector2(16.3f, 4.2f), new Vector2(80f, 80f)), "+");
-        Handles.color = Color.blue;
         if (Handles.Button(midPoint - new Vector2(10f, -4f), Quaternion.identity, 8f, 8f, Handles.CircleCap))
         {
             NodeEditor.window.ReAssignConnection(connectionType, outputNode);
