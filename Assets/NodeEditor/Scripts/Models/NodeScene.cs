@@ -123,7 +123,6 @@ public class NodeScene : ScriptableObject
 
     public virtual void ProcessNodeGUIEvents(Event currentEvent, Vector2 mousePosition)
     {
-        Debug.Log(currentEvent);
 
         if (isConnectionModeActive && selectedNode != null)
         {
