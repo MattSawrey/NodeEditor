@@ -1,0 +1,3 @@
+- After deleting a node there is an index range exception when selecting a new one.
+- Stop the scroll bars changing size with the zoom level
+- Create a re-orderable list of nodes

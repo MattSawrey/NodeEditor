@@ -1,3 +1,7 @@
 # NodeEditor
 
-NodeEditor is a simple, basic template for a NodeEditor for Unity, developed to provide a base from which to produce more purpose-specific node based editors. 
+NodeEditor is a basic template for a Unity node based editor, developed to make the creation of purpose-specific node based editors simpler. 
+
+# Author
+
+Matthew Sawrey

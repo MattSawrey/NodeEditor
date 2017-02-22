@@ -87,6 +87,12 @@ public class NodeScene : ScriptableObject
 
         EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssets();
+
+        if (selectedNodeIndex != 0)
+            selectedNodeIndex--;
+
+        lastSelectedNodeIndex = selectedNodeIndex;
+        nodes[selectedNodeIndex].SelectWindow();
     }
 
     #endregion
@@ -117,6 +123,8 @@ public class NodeScene : ScriptableObject
 
     public virtual void ProcessNodeGUIEvents(Event currentEvent, Vector2 mousePosition)
     {
+        Debug.Log(currentEvent);
+
         if (isConnectionModeActive && selectedNode != null)
         {
             Rect mouseRect = new Rect(NodeEditor.zoomScrollCorrectedMousePosition.x, NodeEditor.zoomScrollCorrectedMousePosition.y, 10, 10);
@@ -138,9 +146,6 @@ public class NodeScene : ScriptableObject
                     selectedNodeIndex = mouseOverNodeIndex;
                     nodes[lastSelectedNodeIndex].DeselectWindow();
                     nodes[selectedNodeIndex].SelectWindow();
-
-                    if (!isNodeDragActive)
-                        isNodeDragActive = true;
 
                     GenericMenu menu = new GenericMenu();
 
@@ -191,7 +196,7 @@ public class NodeScene : ScriptableObject
                     }
                 }
                 else
-                {
+                {                    
                     if (clickedOnNode)
                     {
                         //Select node and allow for drag to occur
@@ -242,7 +247,7 @@ public class NodeScene : ScriptableObject
         {
             case "Delete Node":
                 DeleteNode(selectedNodeIndex);
-                NodeEditor.window.Repaint();
+                //NodeEditor.window.Repaint();
                 break;
             case "Connection":
                 for (int i = 0; i < NodeEditor.nodeConnectionTypes.connectionTypes.Count; i++)
