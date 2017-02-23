@@ -81,6 +81,13 @@
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionType.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\NodeConnections\NodeConnectionTypes.cs" />
     <Compile Include="Assets\NodeEditor\Scripts\RectExtensions.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Object Scripts\BoxController.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Object Scripts\CapsuleController.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Object Scripts\SphereController.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Pool Scripts\ObjPoolTester.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Pool Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Pool Scripts\ObjectPoolController.cs" />
+    <Compile Include="Assets\Simple Pooler\Scripts\Pool Scripts\ObjectPoolEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
