@@ -6,7 +6,7 @@ NodeEditor is a basic template for a Unity node based editor, developed to make 
 
 Matthew Sawrey
 
-##License
+# License
 
 Copyright (C) 2015 Matthew Sawrey
 
