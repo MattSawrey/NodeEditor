@@ -6,10 +6,6 @@ NodeEditor is a template for a Unity node based editor, developed to make the cr
 
 - UnityToolbag
 
-# Author
-
-Matthew Sawrey
-
 # License
 
 Copyright (C) 2015 Matthew Sawrey
