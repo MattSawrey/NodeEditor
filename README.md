@@ -4,7 +4,7 @@ NodeEditor is a template for a Unity node based editor, developed to make the cr
 
 # Requires
 
-- UnityToolbag
+- UnityToolbag (https://github.com/MattSawrey/UnityToolbag)
 
 # License
 
