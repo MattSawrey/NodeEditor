@@ -281,7 +281,7 @@ public class NodeEditor : EditorWindow
     private void DrawScrollAreaGUI(Event e)
     {
         scrollViewRect = new Rect(leftPaneWidth, topPanelHeight, position.width - (leftPaneWidth), position.height- topPanelHeight);
-        scrollViewRect = EditorZoomArea.Begin(zoomScale, scrollViewRect);
+        scrollViewRect = EditorZoomAreaStatics.Begin(zoomScale, scrollViewRect);
 
         using (var scope = new GUI.ScrollViewScope(scrollViewRect, scrollPos, new Rect(leftPaneWidth, topPanelHeight, 10000f, 10000f)))
         {
@@ -297,7 +297,7 @@ public class NodeEditor : EditorWindow
                     ScrollViewGUIEvents(e);
                 }
         }
-        EditorZoomArea.End();
+        EditorZoomAreaStatics.End();
     }
 
     public void ScrollViewGUIEvents(Event currentEvent)
